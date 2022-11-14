@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping</title>
+
+    <link rel="stylesheet" href="index.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html">
+                <img src="./imgs/DBook.png" class="logonav">
+            </a>
+
+            <div class="nav-profile">
+                <p class="nav-profile-name">Cart</p>
+                <div onclick="openCart()" style="cursor: pointer;" class="nav-profile-cart">
+                    <i class="fas fa-cart-shopping"></i>
+                    <div id="cartcount" class="cartcount" style="display: none;">
+                        0
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="sidebar">
+            <input onkeyup="search(this)" id="txt_search" type="text" class="sidebar-search" placeholder="Search...">
+
+            <a onclick="searchproduct('all')" class="sidebar-items">
+                All product
+            </a>
+
+            <a onclick="searchproduct('Manga')" class="sidebar-items">
+                Manga
+            </a>
+            <a onclick="searchproduct('Movies')" class="sidebar-items">
+                Movies
+            </a>
+            <a onclick="searchproduct('Games')" class="sidebar-items">
+                Games
+            </a>
+        </div>
+        <div id="productlist" class="product">
+            <div class="product-items">
+                <img class="product-img" src="./imgs/chainsaw man.jpg" alt="">
+                <p style="font-size: 1.2vw;">chainsaw man</p>
+                <p style="font-size: .9vw;">xxxx THB</p>
+            </div>
+            <div class="product-items">
+                <img class="product-img" src="./imgs/john wick.jpg" alt="">
+                <p style="font-size: 1.2vw;">John wick</p>
+                <p style="font-size: .9vw;">xxxx THB</p>
+            </div>
+            <div class="product-items">
+                <img class="product-img" src="./imgs/the last of us.jpg" alt="">
+                <p style="font-size: 1.2vw;">The last of us</p>
+                <p style="font-size: .9vw;">xxxx THB</p>
+            </div>
+            <div class="product-items">
+                <img class="product-img" src="./imgs/blue lock.jpg" alt="">
+                <p style="font-size: 1.2vw;">Blue lock</p>
+                <p style="font-size: .9vw;">xxxx THB</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalDesc" class="modal" style="display: none;">
+        <div onclick="closeModal()" class="modal-bg"></div>
+        <div class="modal-page">
+            <h2>Detail</h2>
+            <br>
+            <div class="modaldesc-content">
+                <img id="mdd-img" class="modaldesc-img" src="./imgs/chainsaw man.jpg" alt="">
+                <div class="modaldesc-detail">
+                    <p id="mdd-name" style="font-size: 1.5vw;">chainsaw man</p>
+                    <p id="mdd-price" style="font-size: 1.2vw;">xxxx THB</p>
+                    <br>
+                    <p id="mdd-desc" style="color: #adadad;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae voluptatem dolorum perspiciatis, rerum unde ullam obcaecati ex modi nemo exercitationem quae distinctio! Eligendi nisi laborum provident saepe. Quibusdam, quas dolor!</p>
+                    <br>
+                    <div class="btn-control">
+                        <button onclick="closeModal()" class="btn">
+                            Close
+                        </button>
+                        <button onclick="addtocart()" class="btn btn-buy">
+                            Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalCart" class="modal" style="display: none;">
+        <div onclick="closeModal()" class="modal-bg"></div>
+        <div class="modal-page">
+            <h2>My cart</h2>
+            <br>
+            <div id="mycart" class="cartlist">
+                <div class="cartlist-items">
+                    <div class="cartlist-left">
+                        <img src="./imgs/chainsaw man.jpg" alt="">
+                        <div class="cartlist-detail">
+                            <p style="font-size: 1.5vw;">chainsaw man</p>
+                            <p style="font-size: 1.2vw;">xxxx THB</p>
+                        </div>
+                    </div>
+                    <div class="cartlist-right">
+                        <p class="btnc">-</p>
+                        <p style="margin: 0 20px;">xxxx</p>
+                        <p class="btnc">+</p>
+                    </div>
+                </div>
+                <div class="cartlist-items">
+                    <div class="cartlist-left">
+                        <img src="./imgs/john wick.jpg" alt="">
+                        <div class="cartlist-detail">
+                            <p style="font-size: 1.5vw;">John wick</p>
+                            <p style="font-size: 1.2vw;">xxxx THB</p>
+                        </div>
+                    </div>
+                    <div class="cartlist-right">
+                        <p class="btnc">-</p>
+                        <p style="margin: 0 20px;">xxxx</p>
+                        <p class="btnc">+</p>
+                    </div>
+                </div>
+                <div class="cartlist-items">
+                    <div class="cartlist-left">
+                        <img src="./imgs/the last of us.jpg" alt="">
+                        <div class="cartlist-detail">
+                            <p style="font-size: 1.5vw;">The last of us</p>
+                            <p style="font-size: 1.2vw;">xxxx THB</p>
+                        </div>
+                    </div>
+                    <div class="cartlist-right">
+                        <p class="btnc">-</p>
+                        <p style="margin: 0 20px;">xxxx</p>
+                        <p class="btnc">+</p>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-control">
+                <button onclick="closeModal()" class="btn">
+                    Cancel
+                </button>
+                <button class="btn btn-buy">
+                    Buy
+                </button>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
